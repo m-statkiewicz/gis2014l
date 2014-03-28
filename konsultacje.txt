@@ -1,0 +1,22 @@
+siec losowa -> sprowadza sie do grafu losowego z losowymi wagami krawedzi
+	jak nie spojny losowac kolejny - po kliku probach poinformowac uzytkownika
+	Erdos Reny
+
+siec malego swiata -> 
+	zakladamy ze wierzcholki połączone są z sąsiadami, 
+	przestawiamy krawędzie miedzy wierzcholkami
+
+siec euklidesowa ->
+	losujemy punkty z przestrzeni (kwadratu) 
+	podajemy R (promien w jakim poszukujemky pozostalych punktow)
+	znalezione punkty laczymy
+	sprawdzamy spojnosc
+
+siec bezskalowa ->
+	Barabasi-Albert
+
+
+	wszedzie losujemy wagi krawedzi (0,1)
+
+	biblioteka do rysowania grafow: OGDF
+	www.ogdf.net
