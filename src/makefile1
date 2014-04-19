@@ -1,0 +1,17 @@
+CC=g++
+CFLAGS=-c -Wall
+LDFLAGS=
+SOURCES=edge.cpp euclideannetwork.cpp main.cpp network.cpp randomnetwork.cpp scalefreenetwork.cpp smallworldnetwork.cpp
+OBJECTS=$(SOURCES:.cpp=.o)
+EXECUTABLE=networkGenerator
+
+all: $(SOURCES) $(EXECUTABLE)
+	
+$(EXECUTABLE): $(OBJECTS) 
+	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
+
+.cpp.o:
+	$(CC) $(CFLAGS) $< -o $@
+
+clean:
+	rm -rf *.o networkGenerator

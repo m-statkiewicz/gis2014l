@@ -11,12 +11,14 @@
 #include <set>
 
 #include"edge.h"
+#include<string>
 
-abstract class Network {
-private:
+class Network {
+protected:
 	int v;
 	std::set<Edge> e;
-
+	
+	void DFS(int act_v, std::set<int>* visited);
 public:
 	void save(std::string filename);
 	void show(std::string filename, char format_flag);
