@@ -1,6 +1,12 @@
-#include"edge.h"
-
+/*
+ * edge.cpp
+ *
+ *  Created on: April 18, 2014
+ *      Author: Mateusz Statkiewicz
+ */
 #include<cstdlib>
+
+#include"edge.h"
 
 Edge::Edge(int v1, int v2){
 	if (v1>v2) {
@@ -27,8 +33,9 @@ Edge::Edge(int v1, int v2, float w){
 bool Edge::operator<(Edge const &e) const{
 	if (this->v1<e.v1)
 		return true;
+	if (this->v1>e.v1)
+		return false;
 	if (this->v2<e.v2)
 		return true;
 	return false; 
 };
-

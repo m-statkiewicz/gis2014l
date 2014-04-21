@@ -16,5 +16,6 @@ public:
 	Edge(int v1, int v2);
 	Edge(int v1, int v2, float w);
 	bool operator<(Edge const &e) const;
+
 };
 #endif /* EDGE */

@@ -22,8 +22,8 @@ void usage();
 
 int main(int argc, char **argv)
 {
-	int t = 0;
-   int e = 0;
+int t = 0;
+int e = 0;
    int n = 0;
    int v = 0;
 	float p = -1;
@@ -126,6 +126,12 @@ int main(int argc, char **argv)
 	Network* network;
 	switch (t) {
 	case 1:
+		std::cout<<"Generating euclidean network...\n";
+		if (r<=0){	
+			std::cout<<"Value not specified (r).\n";
+			usage();
+			return 0;
+		}
 		network = new EuclideanNetwork(v,r/s);
 		break;
 	case 2:
@@ -149,7 +155,8 @@ int main(int argc, char **argv)
 			usage();
 			return 0;
 		}		
-//		network = new SmallWorldNetwork(v,n,p);
+		std::cout<<"Generating small world network...\n";
+		network = new SmallWorldNetwork(v,n,p);
 		break;
 	}
 	switch (f) {

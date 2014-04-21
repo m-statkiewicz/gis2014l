@@ -1,9 +1,16 @@
-#include"euclideannetwork.h"
-
+/*
+ * euclideannetwork.cpp
+ *
+ *  Created on: April 18, 2014
+ *      Author: Mateusz Statkiewicz
+ */
 #include<cstdlib>
 #include<vector>
 #include<math.h>
-#include<iostream>
+//#include<iostream>
+
+#include"euclideannetwork.h"
+
 
 EuclideanNetwork::EuclideanNetwork(int v, float radius){
 	this->v = v;
@@ -15,10 +22,11 @@ EuclideanNetwork::EuclideanNetwork(int v, float radius){
 	for (int i=0; i<v; ++i)	{
 		x.push_back((float)(rand()%1000)/1000);
 		y.push_back((float)(rand()%1000)/1000);
+//		std::cout<<"v[i] = ("<<x[i]<<","<<y[i]<<")\n";
 		for (int j=0; j<i; ++j){
-		float d = (x[i]-x[j])*(x[i]-x[j])+(y[i]-y[j])*(y[i]-y[j]);
-		if (d<=r)
-			e.insert(*(new Edge(i,j,sqrt(d))));
+			float d = (x[i]-x[j])*(x[i]-x[j])+(y[i]-y[j])*(y[i]-y[j]);
+			if (d<=r)
+				e.insert(*(new Edge(i,j,sqrt(d))));
 		}
 	}
 };
