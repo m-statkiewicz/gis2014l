@@ -30,7 +30,3 @@ EuclideanNetwork::EuclideanNetwork(int v, float radius){
 		}
 	}
 };
-
-EuclideanNetwork::~EuclideanNetwork(){
-	delete &e;
-};

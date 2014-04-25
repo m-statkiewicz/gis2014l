@@ -10,11 +10,13 @@ SmallWorldNetwork::SmallWorldNetwork(int v, int neighbours, float p){
 				e.insert(*(new Edge(i,(i+n)%v)));
 		}
 	}
-	std::cout<<"Initial small world network:\nedges: "<<e.size()<<"\n";
+//	std::cout<<"Initial small world network:\nedges: "<<e.size()<<"\n";
 	std::set<Edge> ecpy(e);
-	for (std::set<Edge>::iterator it = ecpy.begin(); it != ecpy.end(); ++it)
-		std::cout<< it->v1<<" - "<<it->v2<<" ("<<it->wage<< ")\n";
+//	for (std::set<Edge>::iterator it = ecpy.begin(); it != ecpy.end(); ++it)
+//		std::cout<< it->v1<<" - "<<it->v2<<" ("<<it->wage<< ")\n";
 
+//	e.insert(Edge(0,1,1));
+//	std::cout<<"Inserted (0,1,1) count of (0,1,0) : "<<e.count(Edge(0,1,0))<<"\n";
 
 	for (std::set<Edge>::iterator it = ecpy.begin(); it != ecpy.end(); ++it){
 		if ((float)rand()/RAND_MAX < p) {
@@ -36,8 +38,4 @@ SmallWorldNetwork::SmallWorldNetwork(int v, int neighbours, float p){
 			}
 		}		 
 	}
-		
-};
-SmallWorldNetwork::~SmallWorldNetwork(){
-//delete &e;
 };

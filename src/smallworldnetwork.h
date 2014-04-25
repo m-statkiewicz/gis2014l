@@ -13,6 +13,5 @@
 class SmallWorldNetwork : public Network {
 public:
 	SmallWorldNetwork(int v, int neighbours, float p);
-	~SmallWorldNetwork();
 };
 #endif /* SMALLWORLDNETWORK */

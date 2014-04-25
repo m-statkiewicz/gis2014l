@@ -13,6 +13,5 @@
 class EuclideanNetwork : public Network {
 public:
 	EuclideanNetwork(int v, float radius);
-	~EuclideanNetwork();
 };
 #endif /* EUCLIDEANNETWORK */

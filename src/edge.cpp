@@ -9,18 +9,18 @@
 #include"edge.h"
 
 Edge::Edge(int v1, int v2){
-	if (v1>v2) {
+	if (v1<v2) {
 		this->v1 = v1;
 		this->v2 = v2;
 	} else {
 		this->v1 = v2;
 		this->v2 = v1;
 	}
-	this->wage = rand()%1000/1000;
+	this->wage = (float)rand()/RAND_MAX;
 };
 
 Edge::Edge(int v1, int v2, float w){
-	if (v1>v2) {
+	if (v1<v2) {
 		this->v1 = v1;
 		this->v2 = v2;
 	} else {

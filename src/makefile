@@ -1,6 +1,12 @@
 all: clean networkGenerator
 
+install:
+	mkdir ../target
+	mv *.o ../target
+	mv networkGenerator ../target
+
 clean:
+	rm -Rf ../target
 	rm -rf *.o networkGenerator
 
 networkGenerator: main.o smallworldnetwork.o scalefreenetwork.o randomnetwork.o euclideannetwork.o network.o edge.o
