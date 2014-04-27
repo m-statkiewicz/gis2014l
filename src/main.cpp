@@ -36,6 +36,8 @@ float s = 1;
 std::string d;
 int f = 0;
 int c=0;
+int m=0;
+int m0=0;
 if (argc==0){
 	help();
 }
@@ -59,14 +61,14 @@ for (int i=1; i<argc; ++i){
 		if (std::string(argv[i])=="-v"){
 			std::stringstream str(argv[++i]);
 			str>>v;
-			if (v<0)
-				throw std::string("vertices number below 0");
+			if (v<=0)
+				throw std::string("number of vertices below 1");
 		}
 		if (std::string(argv[i])=="-e"){
 			std::stringstream str(argv[++i]);
 			str>>e;
 			if (e<0)
-				throw std::string("edges number below 0");
+				throw std::string("number of edges below 0");
 		}
 		if (std::string(argv[i])=="-n"){
 			std::stringstream str(argv[++i]);
@@ -104,6 +106,18 @@ for (int i=1; i<argc; ++i){
 			if (s<0)
 				throw std::string("side length below 0");
 		}
+        if (std::string(argv[i]) == "-m0"){
+            std::stringstream str(argv[++i]);
+            str >> m0;
+            if (m0 < 2)
+                throw std::string("initial network too small");
+        }
+        if (std::string(argv[i]) == "-m") {
+            std::stringstream str(argv[++i]);
+            str >> m;
+            if (m < 1)
+                throw std::string("new node's degree too small");
+        }
 		if (i==j){
 			std::cout<<"Invalid option "<<argv[i]<<".\n";
 			help();
@@ -139,22 +153,28 @@ try{
 		network = new EuclideanNetwork(v,r/s);
 		break;
 	case 2:
-		if (v<=0)
-			wrongValues+="v";
+        if (v<=0)
+            wrongValues+="v";
 		if (e<=0 && p<0)
 			wrongValues+="ep";
+        if (e > (v*(v-1))/2)
+            wrongValues+="e";
 		if (wrongValues.length() != 0)
 			throw wrongValues;	
-		std::cout<<"Generating random network...\n";
-	//		network = new RandomNetwork(v);
+		std::cout << "Generating random network..." << std::endl;
+		network = new RandomNetwork(v, e, p);
 		break;
 	case 3:
-		if (v<=0)
-			wrongValues+="v";
+        if (v<=0)
+            wrongValues+="v";
+        if (m0 >= v || m0 < 2)
+            wrongValues+="m0";
+        if (m > m0 || m < 1)
+            wrongValues+="m";
 		if (wrongValues.length() != 0)
 			throw wrongValues;	
-		std::cout<<"Generating scale free network...\n";
-	//		network = new ScaleFreeNetwork(v,p);
+		std::cout << "Generating scale free network..." << std::endl;
+		network = new ScaleFreeNetwork(v, m0, m);
 		break;
 	case 4:
 		if (v<=0)
@@ -195,8 +215,8 @@ void usage()
 {
 std::cout<<"Usage:\n./networkGenerator [OPTION] \nGenerate network corresponding to parameters:\n\nOptions:\n-a\tabout program\n-h\tdisplay help\n-d\tdestination file name\n-f\tdestination format:\n\t 1 - Flat file\n\t 2 - jpg\n-t\ttype of network: \n\t 1 - Euclidean Network \n\t 2 - Random Network\n\t 3 - Scale Free Network\n\t 4 - Small World Network\n\n";
 std::cout<<"Mandatory Euclidean Network parameters:\n\t-v\tcount of verticles\n\t-s\tsize side squere in which network will be generate (default 1)\n\t-r\tradius, which edges will be generate\n";
-std::cout<<"Mandatory Random Network parameters:\n\t-v\tcount of verticles\n\t-e\tcount of edges\n\t-p\tedge existing probability\n";
-std::cout<<"Mandatory Scale Free Network parameters:\n\t-v\tcount of verticles\n";
+std::cout<<"Mandatory Random Network parameters:\n\t-v\tcount of verticles\n\t-e\tcount of edges; or\n\t-p\tedge existing probability\n";
+std::cout<<"Mandatory Scale Free Network parameters:\n\t-v\tcount of verticles\n\t-m0\tnumber of vertices in the initial network\n\t-m\tdegree of each new vertex\n";
 std::cout<<"Mandatory Small World Network parameters:\n\t-v\tcount of verticles\n\t-n\tcount of neighbours at start\n\t-p\tedge change probability\n";
 };
 
