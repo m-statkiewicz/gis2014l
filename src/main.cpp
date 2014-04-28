@@ -19,6 +19,8 @@
 #include "scalefreenetwork.h"
 #include "smallworldnetwork.h"
 #include "network.h"
+#include "timer.h"
+
 
 void usage();
 void help();
@@ -38,6 +40,7 @@ int f = 0;
 int c=0;
 int m=0;
 int m0=0;
+Timer tcreate, tdfs;
 if (argc==0){
 	help();
 }
@@ -150,7 +153,9 @@ try{
 		if (wrongValues.length() != 0)
 			throw wrongValues;	
 		std::cout<<"Generating euclidean network...\n";
+		tcreate.start();
 		network = new EuclideanNetwork(v,r/s);
+		tcreate.stop();
 		break;
 	case 2:
         if (v<=0)
@@ -162,7 +167,9 @@ try{
 		if (wrongValues.length() != 0)
 			throw wrongValues;	
 		std::cout << "Generating random network..." << std::endl;
+		tcreate.start();
 		network = new RandomNetwork(v, e, p);
+		tcreate.stop();
 		break;
 	case 3:
         if (v<=0)
@@ -174,7 +181,9 @@ try{
 		if (wrongValues.length() != 0)
 			throw wrongValues;	
 		std::cout << "Generating scale free network..." << std::endl;
+		tcreate.start();
 		network = new ScaleFreeNetwork(v, m0, m);
+		tcreate.stop();
 		break;
 	case 4:
 		if (v<=0)
@@ -186,7 +195,9 @@ try{
 		if (wrongValues.length() != 0)
 			throw wrongValues;	
 		std::cout<<"Generating small world network...\n";
+		tcreate.start();
 		network = new SmallWorldNetwork(v,n,p);
+		tcreate.stop();
 		break;
 	default:
 		throw wrongValues+="t";		
@@ -207,7 +218,10 @@ try{
 	help();
 	return 0;
 }
-std::cout<<"Network created, saved in file "<<d<<". Network is"<< (network->isCompact() ? "" : " not") <<" coherent.\n";
+tdfs.start();
+bool isCoherent = network->isCompact();
+tdfs.stop();
+std::cout<<"Network created in "<<tcreate.deltaToString()<<", saved into file "<<d<<". Network is"<< (isCoherent ? "" : " not") <<" coherent. DFS algorithm takes "<<tdfs.deltaToString()<<"\n";
 return 1;
 }
 

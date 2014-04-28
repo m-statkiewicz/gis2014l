@@ -23,7 +23,7 @@ SmallWorldNetwork::SmallWorldNetwork(int v, int neighbours, float p){
 					v2 = rand()%v;
 				}
 				Edge edge(v1,v2);			
-				i=e.count(edge);i<<"\n";
+				i=e.count(edge);
 				e.insert(*(new Edge(v1,v2)));
 			}
 		}		 

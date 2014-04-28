@@ -10,6 +10,8 @@
 
 #include"network.h"
 
+#include<vector>
+
 class EuclideanNetwork : public Network {
 public:
 	std::vector<float> x;
