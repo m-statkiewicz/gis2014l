@@ -17,11 +17,12 @@ class Network {
 protected:
 	int v;
 	std::set<Edge> e;
+    unsigned int scale;
 	
 	void DFS(int act_v, std::set<int>* visited);
 public:
 	void save(std::string filename);
-	void show(std::string filename, const char* filetype);
+	virtual void show(std::string filename, const char* filetype);
 	bool isCompact();
 };
 #endif /* NETWORK */

@@ -7,6 +7,9 @@
 #include<cstdlib>
 #include<vector>
 #include<math.h>
+#include <graphviz/gvc.h>
+#include <sstream>
+#include <iostream>
 
 #include"euclideannetwork.h"
 
@@ -14,6 +17,7 @@
 EuclideanNetwork::EuclideanNetwork(int v, float radius){
 	this->v = v;
 	float r=radius*radius;
+    scale = 7;
 
 	for (int i=0; i<v; ++i)	{
 		x.push_back((float)(rand()%1000)/1000);
@@ -21,12 +25,12 @@ EuclideanNetwork::EuclideanNetwork(int v, float radius){
 		for (int j=0; j<i; ++j){
 			float d = (x[i]-x[j])*(x[i]-x[j])+(y[i]-y[j])*(y[i]-y[j]);
 			if (d<=r)
-				e.insert(*(new Edge(i,j,sqrt(d))));
+				e.insert(Edge(i,j,sqrt(d)));
 		}
 	}
 };
 
-void EuclideanNetwork::show(std:;string filename, const char* filetype) {
+void EuclideanNetwork::show(std::string filename, const char* filetype) {
     GVC_t *gvc;
     Agraph_t *g;
     std::stringstream sStream;
@@ -35,25 +39,30 @@ void EuclideanNetwork::show(std:;string filename, const char* filetype) {
     int i = 0;
 
     if (v < 1) return;
-    
+
     gvc = gvContext();
     g = agopen("g", Agundirected, 0);
 
     while (i < v) {
         sStream.str("");
-        sStream << i++;
+        sStream << i;
         vNodes.push_back(agnode(g, sStream.str().c_str(), 1));
         sStream.str("");
-        sStream << 
+        sStream << x[i]*7 << "," << y[i]*7 << "!";
+        agsafeset(vNodes[vNodes.size()-1], "height", "0.4", "");
+        agsafeset(vNodes[vNodes.size()-1], "width", "0.4", "");
+        agsafeset(vNodes[vNodes.size()-1], "fixedsize", "true", "");
+        agsafeset(vNodes[vNodes.size()-1], "pos", sStream.str().c_str(), "");
+        i++;
     }
 
     for (std::set<Edge>::iterator x = e.begin(); x != e.end(); ++x) {
         sStream.str("");
-        sStream << ((*x).wage * 2);
+        sStream << ((*x).wage * scale);
         vEdges.push_back(agedge(g, vNodes[(*x).v1], vNodes[(*x).v2], sStream.str().c_str(), 1));
     }
 
-    gvLayout(gvc, g, "neato");
+    gvLayout(gvc, g, "fdp");
     gvRenderFilename(gvc, g, filetype, filename.c_str());
 
     gvFreeLayout(gvc, g);

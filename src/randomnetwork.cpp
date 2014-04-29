@@ -10,7 +10,8 @@
 
 RandomNetwork::RandomNetwork(int v, int e, float p) {
     float fRand;
-    
+    scale = 7;
+
     srand(time(NULL));
 
     if (p < 0)
@@ -24,7 +25,7 @@ RandomNetwork::RandomNetwork(int v, int e, float p) {
 
             fRand = ((double) rand() / (RAND_MAX));
 
-            if (fRand >= p) {
+            if (fRand < p) {
                 fRand = ((double) rand() / (RAND_MAX));
                 this->e.insert(Edge(i, j, fRand));
             }

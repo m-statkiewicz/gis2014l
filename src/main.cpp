@@ -225,7 +225,7 @@ tdfs.start();
 bool isCoherent = network->isCompact();
 tdfs.stop();
 std::cout<<"Network created in "<<tcreate.deltaToString()<<", saved into file "<<d<<". Network is"<< (isCoherent ? "" : " not") <<" coherent. DFS algorithm takes "<<tdfs.deltaToString()<<"\n";
-return 1;
+return 0;
 }
 
 void usage()

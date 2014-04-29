@@ -46,16 +46,19 @@ void Network::show(std::string filename, const char* filetype) {
         sStream.str("");
         sStream << i++;
         vNodes.push_back(agnode(g, sStream.str().c_str(), 1));
+        agsafeset(vNodes[vNodes.size()-1], "height", "0.4", "");
+        agsafeset(vNodes[vNodes.size()-1], "width", "0.4", "");
+        agsafeset(vNodes[vNodes.size()-1], "fixedsize", "true", "");
     }
 
     for (std::set<Edge>::iterator x = e.begin(); x != e.end(); ++x) {
         sStream.str("");
-        sStream << ((*x).wage * 2);
+        sStream << ((*x).wage * scale);
         vEdges.push_back(agedge(g, vNodes[(*x).v1], vNodes[(*x).v2], sStream.str().c_str(), 1));
         agsafeset(vEdges[vEdges.size()-1], "len", sStream.str().c_str(), "");
     }
 
-    gvLayout(gvc, g, "neato");
+    gvLayout(gvc, g, "fdp");
     gvRenderFilename(gvc, g, filetype, filename.c_str());
 
     gvFreeLayout(gvc, g);
