@@ -21,7 +21,7 @@ protected:
 	void DFS(int act_v, std::set<int>* visited);
 public:
 	void save(std::string filename);
-	void show(std::string filename, char format_flag);
+	void show(std::string filename, const char* filetype);
 	bool isCompact();
 };
 #endif /* NETWORK */

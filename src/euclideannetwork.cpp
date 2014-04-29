@@ -30,3 +30,41 @@ EuclideanNetwork::EuclideanNetwork(int v, float radius){
 		}
 	}
 };
+
+void EuclideanNetwork::show(std:;string filename, const char* filetype) {
+    GVC_t *gvc;
+    Agraph_t *g;
+    std::stringstream sStream;
+    std::vector<Agnode_t *> vNodes;
+    std::vector<Agedge_t *> vEdges;
+    int i = 0;
+
+    if (v < 1) return;
+    
+    gvc = gvContext();
+    g = agopen("g", Agundirected, 0);
+
+    while (i < v) {
+        sStream.str("");
+        sStream << i++;
+        vNodes.push_back(agnode(g, sStream.str().c_str(), 1));
+        sStream.str("");
+        sStream << 
+    }
+
+    for (std::set<Edge>::iterator x = e.begin(); x != e.end(); ++x) {
+        sStream.str("");
+        sStream << ((*x).wage * 2);
+        vEdges.push_back(agedge(g, vNodes[(*x).v1], vNodes[(*x).v2], sStream.str().c_str(), 1));
+    }
+
+    gvLayout(gvc, g, "neato");
+    gvRenderFilename(gvc, g, filetype, filename.c_str());
+
+    gvFreeLayout(gvc, g);
+    agclose(g);
+    gvFreeContext(gvc);
+
+    return;
+
+}
