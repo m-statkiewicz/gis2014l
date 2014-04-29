@@ -69,20 +69,12 @@ void Network::show(std::string filename, const char* filetype) {
 bool Network::isCompact(){
 	std::set<int> visited;
 	DFS(1, &visited);
-//	std::cout<< visited.size()<<"=="<<this->v<<"\n";
-
 	if (visited.size() == this->v) 
 		return true;
 	return false;
 };
 
 void Network::DFS(int act_v, std::set<int>* visited){
-	//for (int i=0;i<v;++i) visited->insert(i);
-//	std::cout<<"DFS in "<<act_v<<"\n Visited:";
-//	for (std::set<int>::iterator it = visited->begin(); it != visited->end(); ++it)
-//		std::cout<< *it<<"\t";
-//		std::cout<<"#"<<visited->size()<<"\n";
-		
 	if (visited->count(act_v)==0)
 	{
 		visited->insert(act_v);

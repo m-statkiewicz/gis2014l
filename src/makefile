@@ -10,9 +10,9 @@ clean:
 	rm -rf *.o networkGenerator
 
 networkGenerator: main.o smallworldnetwork.o scalefreenetwork.o randomnetwork.o euclideannetwork.o network.o edge.o
-	g++ main.o smallworldnetwork.o scalefreenetwork.o randomnetwork.o euclideannetwork.o network.o edge.o -o networkGenerator -lgvc -lcgraph
+	g++ main.o smallworldnetwork.o scalefreenetwork.o randomnetwork.o euclideannetwork.o network.o edge.o timer.o -o networkGenerator -lgvc -lcgraph
 
-main.o: network.h smallworldnetwork.h scalefreenetwork.h randomnetwork.h euclideannetwork.h
+main.o: network.h smallworldnetwork.h scalefreenetwork.h randomnetwork.h euclideannetwork.h timer.h
 	g++ -c main.cpp
 
 smallworldnetwork.o: smallworldnetwork.cpp network.h 
@@ -32,3 +32,6 @@ network.o: network.cpp edge.h
 
 edge.o: edge.cpp
 	g++ -c edge.cpp
+
+timer.o: timer.cpp
+	g++ -c timer.cpp
