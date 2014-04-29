@@ -46,8 +46,7 @@ std::string Timer::deltaToString()
 {
 	std::stringstream ss;
 	double sec = delta();
-	int min = (int)sec/60;
-	sec = sec - min * 60;
-	ss << min <<":"<< sec;
+    ss.setf(std::ios_base::fixed, std::ios_base::floatfield);
+	ss << sec;
 	return ss.str();
 }

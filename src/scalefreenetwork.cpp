@@ -13,6 +13,7 @@ ScaleFreeNetwork::ScaleFreeNetwork(int v, int m0, int m) {
     unsigned int m0index, noEdges, degreeSum;
     std::vector<unsigned int> degrees, addInds;
     int rind;
+    scale = 2;
 
     this->v = v;
     degrees.resize(v, 0);

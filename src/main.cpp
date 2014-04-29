@@ -90,7 +90,7 @@ for (int i=1; i<argc; ++i){
 		if (std::string(argv[i])=="-f"){
 			std::stringstream str(argv[++i]);
 			str>>f;
-			if (f<0 || f>2)
+			if (f<1 || f>3)
 				throw std::string("format type not specified");
 		}
 		if (std::string(argv[i])=="-d"){
@@ -207,8 +207,11 @@ try{
 		network->save(d);
 		break;
 	case 2:
-		network->show(d,'a');
+		network->show(d, "jpg");
 		break;
+    case 3:
+        network->show(d, "png");
+        break;
 	}
 }catch (std::string e){
 	std::cout<<"!!! Required value(s) not specified ("<<e[0];
@@ -222,12 +225,12 @@ tdfs.start();
 bool isCoherent = network->isCompact();
 tdfs.stop();
 std::cout<<"Network created in "<<tcreate.deltaToString()<<", saved into file "<<d<<". Network is"<< (isCoherent ? "" : " not") <<" coherent. DFS algorithm takes "<<tdfs.deltaToString()<<"\n";
-return 1;
+return 0;
 }
 
 void usage()
 {
-std::cout<<"Usage:\n./networkGenerator [OPTION] \nGenerate network corresponding to parameters:\n\nOptions:\n-a\tabout program\n-h\tdisplay help\n-d\tdestination file name\n-f\tdestination format:\n\t 1 - Flat file\n\t 2 - jpg\n-t\ttype of network: \n\t 1 - Euclidean Network \n\t 2 - Random Network\n\t 3 - Scale Free Network\n\t 4 - Small World Network\n\n";
+std::cout<<"Usage:\n./networkGenerator [OPTION] \nGenerate network corresponding to parameters:\n\nOptions:\n-a\tabout program\n-h\tdisplay help\n-d\tdestination file name\n-f\tdestination format:\n\t 1 - Flat file\n\t 2 - jpg\n\t 3 - png\n-t\ttype of network: \n\t 1 - Euclidean Network \n\t 2 - Random Network\n\t 3 - Scale Free Network\n\t 4 - Small World Network\n\n";
 std::cout<<"Mandatory Euclidean Network parameters:\n\t-v\tcount of verticles\n\t-s\tsize side squere in which network will be generate (default 1)\n\t-r\tradius, which edges will be generate\n";
 std::cout<<"Mandatory Random Network parameters:\n\t-v\tcount of verticles\n\t-e\tcount of edges; or\n\t-p\tedge existing probability\n";
 std::cout<<"Mandatory Scale Free Network parameters:\n\t-v\tcount of verticles\n\t-m0\tnumber of vertices in the initial network\n\t-m\tdegree of each new vertex\n";

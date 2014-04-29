@@ -11,6 +11,7 @@ SmallWorldNetwork::SmallWorldNetwork(int v, int neighbours, float p){
 		}
 	}
 	std::set<Edge> ecpy(e);
+    scale = 7;
 
 	for (std::set<Edge>::iterator it = ecpy.begin(); it != ecpy.end(); ++it){
 		if ((float)rand()/RAND_MAX < p) {
